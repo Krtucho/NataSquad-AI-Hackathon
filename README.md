@@ -53,4 +53,40 @@ El proceso que se ejecutó en este código se puede resumir de la siguiente mane
 
 Los resultados obtenidos indican que el modelo de regresión lineal tiene un rendimiento razonablemente bueno en la predicción de la demanda eléctrica en el conjunto de datos de prueba. El MSE fue de 0.008, RMSE fue de 0.094 y MAE fue de 0.079 después de normalizar la columna de demanda eléctrica.
 
-## Modelo Arima
+## Modelo ARIMA
+
+El modelo ARIMA (AutoRegressive Integrated Moving Average) es otro modelo comúnmente utilizado para el pronóstico de series temporales, incluyendo la demanda eléctrica. Este modelo es capaz de capturar patrones complejos en los datos de series temporales y puede ser especialmente efectivo en la identificación de patrones de estacionalidad y tendencia.
+
+A continuación, se presentan algunas razones por las cuales se podría considerar el uso de un modelo ARIMA para el pronóstico de la demanda eléctrica en Inglaterra:
+
+1. Estacionalidad: La demanda eléctrica puede variar de manera estacional, con patrones diarios, semanales o mensuales. El modelo ARIMA está diseñado para capturar patrones de estacionalidad y puede ser una buena opción para pronosticar la demanda eléctrica en función de estos patrones.
+
+2. Diferenciación: El modelo ARIMA incluye una etapa de diferenciación para eliminar la tendencia de los datos y hacerlos estacionarios. Esto puede ser útil para eliminar cualquier tendencia o patrón no estacional en los datos de la demanda eléctrica y facilitar la identificación de patrones de estacionalidad.
+
+3. Flexibilidad: El modelo ARIMA es un modelo flexible que puede ajustarse a una amplia variedad de patrones en los datos de la demanda eléctrica, incluyendo patrones no lineales y patrones de estacionalidad irregulares.
+
+4. Historial de datos: El modelo ARIMA es capaz de utilizar el historial de datos para pronosticar la demanda eléctrica futura. Esto significa que puede ser una buena opción si se dispone de una cantidad suficiente de datos históricos para ajustar el modelo.
+
+Es importante destacar que el modelo ARIMA también tiene algunas limitaciones, como la suposición de estacionariedad y la dificultad para manejar patrones de estacionalidad complejos. Además, el modelo ARIMA puede ser más complejo y difícil de interpretar que el modelo de regresión lineal. Por lo tanto, es importante evaluar cuidadosamente la naturaleza de los datos y el rendimiento del modelo antes de decidir utilizar el modelo ARIMA para el pronóstico de la demanda eléctrica en Inglaterra.
+
+### Proceso para el modelo ARIMA
+
+El código muestra un ejemplo de cómo utilizar el modelo ARIMA para predecir la demanda de energía en un sistema de transmisión. A continuación, una breve explicacion de lo que se hace en cada paso:
+
+1. Se cargan los datos históricos en un DataFrame de Pandas. Los datos deben estar en un archivo CSV y deben incluir una columna con la fecha y hora y otra columna con la demanda del sistema de transmisión (TSD). Se utiliza la función `read_csv()` de Pandas para cargar los datos y la función `set_index()` para establecer la columna de fecha como índice del DataFrame.
+
+2. Se realiza un análisis exploratorio de datos y se visualiza la serie temporal para entender mejor las características de los datos. Se utiliza la función `plot()` de Matplotlib para visualizar la serie temporal.
+
+3. Se realiza una prueba de estacionariedad para determinar si la serie temporal es estacionaria o no. Se utiliza la prueba de Dickey-Fuller aumentada (ADF) para esto. Si el valor p es menor que 0.05, se puede rechazar la hipótesis nula de que la serie temporal es no estacionaria. De lo contrario, la serie temporal no es estacionaria y se debe aplicar una transformación. En este ejemplo, no se realiza una transformación ya que la serie temporal parece ser estacionaria.
+
+4. Se aplica una transformación a la serie temporal si es necesario. Una transformación común es la diferenciación de la serie temporal. En este ejemplo, se aplica la diferenciación de primer orden utilizando la función `diff()` de Pandas.
+
+5. Se determinan los valores óptimos de los parámetros AR, I y MA del modelo ARIMA utilizando técnicas como la autocorrelación y la autocorrelación parcial. Se utilizan las funciones `plot_acf()` y `plot_pacf()` de statsmodels para visualizar estos gráficos.
+
+6. Se ajusta el modelo ARIMA utilizando los valores óptimos de los parámetros. Se utiliza la función `ARIMA()` de statsmodels para crear el modelo y la función `fit()` para ajustar el modelo a los datos.
+
+7. Se realizan predicciones en los datos de prueba utilizando el modelo ARIMA ajustado. Se utiliza el método `predict()` de statsmodels para realizar las predicciones.
+
+8. Se evalúa el rendimiento del modelo utilizando métricas como el error cuadrático medio (MSE) y el error absoluto medio (MAE). También se analizan los residuos para asegurarse de que no haya patrones significativos en ellos.
+
+Al final se lleva a cabo una breve explicacion de las conclusiones a las que se pudieron llegar luego de analizar y comparar ambos modelos.
